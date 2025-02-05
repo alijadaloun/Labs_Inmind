@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "Ob2POP2MyZXKx30eELLWI2Bu34OjMg0/EAa5iNtGzz0=",
+  "Source": "Lab1",
+  "BasePath": "_content/Lab1",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Lab1\\wwwroot",
+      "Source": "Lab1",
+      "ContentRoot": "C:\\Users\\alijadaloun\\Desktop\\BE Track\\Lab1\\Lab1\\wwwroot\\",
+      "BasePath": "_content/Lab1",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
