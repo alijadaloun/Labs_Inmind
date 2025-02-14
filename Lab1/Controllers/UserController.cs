@@ -10,12 +10,13 @@ namespace Lab1.Controllers;
 [ServiceFilter(typeof(LoggingActionFilter))]
 public class UserController: ControllerBase
 {
-    
 private readonly UserService _userService;
+private readonly IWebHostEnvironment _webHostEnvironment;
 
-public UserController(UserService userService)
+public UserController(UserService userService, IWebHostEnvironment webHostEnvironment)
 {
     _userService = userService;
+    _webHostEnvironment = webHostEnvironment;
 }
 
 [HttpGet("allusers")]
@@ -60,9 +61,16 @@ public IActionResult UpdateUser(long id, string newName, string email)
 }
 
 [HttpPost("postimg")] 
-public IActionResult PostImage( IFormFile file)
+public IActionResult PostImage([FromForm] WrapperClass file)
 {
-
+        string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+        string uniquepath = Guid.NewGuid().ToString() + Path.GetExtension(file.File.FileName);
+        string filePath = Path.Combine(uploadDir, uniquepath);
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        { 
+                file.File.CopyTo(stream);
+        }
+        _userService.PostImage(file);
         return Ok( "File posted successfully" );
 
 
@@ -71,10 +79,18 @@ public IActionResult PostImage( IFormFile file)
 [HttpPost("deleteUser/{id}")]
 public IActionResult DeleteUser(long id)
 {
+        
    
         _userService.DeleteUser(id);
         return Ok( $"user of id {id} deleted" );
     
 }
+
+}
+
+public class WrapperClass
+{
+        public IFormFile File { get; set; }
+        // this is used because swagger could not run the app while fromform is used with iformfile
 
 }
