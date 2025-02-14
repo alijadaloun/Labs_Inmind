@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Runtime.InteropServices.JavaScript;
+using Lab1.Controllers;
 using Lab1.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -71,7 +72,7 @@ public List<User> GetUsers()
         user.email = email;
     }
 
-    public void PostImage( IFormFile file)
+    public void PostImage( WrapperClass file)
     {
         if (file == null) throw new ArgumentNullException("Upload an image file not null");
 

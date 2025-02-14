@@ -168,3 +168,15 @@ C:\Users\alijadaloun\Desktop\BE Track\Lab1\Lab1\bin\Debug\net8.0\runtimes\win\li
 C:\Users\alijadaloun\Desktop\BE Track\Lab1\Lab1\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\alijadaloun\Desktop\BE Track\Lab1\Lab1\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\alijadaloun\Desktop\BE Track\Lab1\Lab1\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\alijadaloun\Desktop\BE Track\Lab1\Lab1\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\alijadaloun\Desktop\BE Track\Lab1\Lab1\bin\Debug\net8.0\Npgsql.dll
+C:\Users\alijadaloun\Desktop\BE Track\Lab1\Lab1\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\alijadaloun\Desktop\BE Track\lab1\lab1\bin\Debug\net8.0\Lab1.staticwebassets.endpoints.json
+C:\Users\alijadaloun\Desktop\BE Track\lab1\lab1\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\alijadaloun\Desktop\BE Track\lab1\lab1\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\alijadaloun\Desktop\BE Track\lab1\lab1\obj\Debug\net8.0\staticwebassets\msbuild.Lab1.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\alijadaloun\Desktop\BE Track\Lab1\Lab1\bin\Debug\net8.0\Microsoft.AspNetCore.OData.dll
+C:\Users\alijadaloun\Desktop\BE Track\Lab1\Lab1\bin\Debug\net8.0\Microsoft.OData.Core.dll
+C:\Users\alijadaloun\Desktop\BE Track\Lab1\Lab1\bin\Debug\net8.0\Microsoft.OData.Edm.dll
+C:\Users\alijadaloun\Desktop\BE Track\Lab1\Lab1\bin\Debug\net8.0\Microsoft.OData.ModelBuilder.dll
+C:\Users\alijadaloun\Desktop\BE Track\Lab1\Lab1\bin\Debug\net8.0\Microsoft.Spatial.dll
