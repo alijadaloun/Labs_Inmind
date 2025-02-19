@@ -1,3 +1,4 @@
+**Note: I added Odata Queries in each controller as comment and will add a seperate text file for them.**
 # Lab 4 Summary
 
 In Lab 4, we explored several important libraries in ASP.NET that facilitate backend usage.
