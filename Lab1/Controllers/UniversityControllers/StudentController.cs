@@ -1,6 +1,7 @@
 using AutoMapper;
 using Lab1.Models.UniversityModels;
 using Lab1.Services.UniversityServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lab1.Controllers.UniversityControllers;

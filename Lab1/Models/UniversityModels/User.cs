@@ -1,4 +1,4 @@
-namespace Lab1;
+namespace Lab1.Models.UniversityModels;
 
 public class User
 {

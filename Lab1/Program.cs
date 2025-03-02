@@ -10,6 +10,12 @@ using Microsoft.OData.ModelBuilder;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OData.ModelBuilder;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,9 +29,22 @@ builder.Services.AddDbContext<LibrarydbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Host=localhost;Port=5432;Database=librarydb;Username=ALIJAD;Password=alijad")));
 builder.Services.AddAutoMapper(typeof(StudentProfile));
 builder.Services.AddAutoMapper(typeof(TeacherProfile));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = "https://your-keycloak-domain/auth/realms/myrealm";
+        options.Audience = "myclient";
+        options.RequireHttpsMetadata = false;
+    });
 
-
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("admin"));
+    options.AddPolicy("StudentOnly", policy => policy.RequireRole("student"));
+    options.AddPolicy("TeacherOnly", policy => policy.RequireRole("teacher"));
+});
 builder.Services.AddControllers();
+builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration["AzureBlobStorage:ConnectionString"]));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<LoggingActionFilter>();
@@ -37,6 +56,7 @@ builder.Services.AddScoped<CourseService>();
 builder.Services.AddScoped<RegistrationService>();
 builder.Services.AddScoped<StudentService>();
 builder.Services.AddScoped<TeacherService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -46,6 +66,8 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
     });
 });
+
+
 var modelBuilder = new ODataConventionModelBuilder();
 modelBuilder.EntitySet<Book>("Books");
 modelBuilder.EntitySet<Author>("Authors");
@@ -73,8 +95,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-// app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseCors("AllowAll");
-app.UseRouting();
+
 app.MapControllers();
 app.Run();

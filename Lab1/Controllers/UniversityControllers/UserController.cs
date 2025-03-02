@@ -1,10 +1,10 @@
-using Lab1.Exceptions;
+using Azure.Storage.Blobs;
 using Lab1.Filters;
 using Lab1.Services;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Lab1.Services.UniversityServices;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Lab1.Controllers;
+namespace Lab1.Controllers.UniversityControllers;
 [ApiController]
 [Route("api/users")]//the base url for all endpoints
 [ServiceFilter(typeof(LoggingActionFilter))]
@@ -12,12 +12,15 @@ public class UserController: ControllerBase
 {
 private readonly UserService _userService;
 private readonly IWebHostEnvironment _webHostEnvironment;
+private readonly BlobStorageService _blobStorageService;
 
-public UserController(UserService userService, IWebHostEnvironment webHostEnvironment)
+public UserController(UserService userService, IWebHostEnvironment webHostEnvironment, BlobStorageService blobStorageService)
 {
     _userService = userService;
     _webHostEnvironment = webHostEnvironment;
+    _blobStorageService = blobStorageService;
 }
+
 
 [HttpGet("allusers")]
 public IActionResult GetUsers()
@@ -70,10 +73,8 @@ public IActionResult PostImage([FromForm] WrapperClass file)
         { 
                 file.File.CopyTo(stream);
         }
-        _userService.PostImage(file);
+        
         return Ok( "File posted successfully" );
-
-
 }
 
 [HttpDelete("deleteUser/{id}")]
@@ -84,6 +85,29 @@ public IActionResult DeleteUser(long id)
         _userService.DeleteUser(id);
         return Ok( $"user of id {id} deleted" );
     
+}
+[HttpPost("uploadimg")]
+public async Task<IActionResult> UploadUserImage(IFormFile file)
+{
+        var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+
+        using (var stream = file.OpenReadStream())
+        {
+                var fileUrl = await _blobStorageService.UploadFileAsync(stream, fileName);
+                return Ok("File uploaded successfully");
+        }
+}
+
+[HttpDelete("deleteimg")]
+public async Task<IActionResult> DeleteUserImage(string fileName)
+{
+        var isDeleted = await _blobStorageService.DeleteFileAsync(fileName);
+        if (!isDeleted)
+        {
+                return NotFound("File not found.");
+        }
+
+        return Ok("File deleted successfully.");
 }
 
 }

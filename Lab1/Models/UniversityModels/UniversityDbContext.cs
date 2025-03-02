@@ -10,6 +10,7 @@ public class UniversityDbContext: DbContext
     public DbSet<Registration> Registrations { get; set; }
     public DbSet<Schedule> Schedules { get; set; }
     public DbSet<Teacher> Teachers { get; set; }
+    public DbSet<User> Users { get; set; }
     
     
     public UniversityDbContext()
