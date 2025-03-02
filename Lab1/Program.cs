@@ -93,9 +93,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }// this caused error when it runs before UseExceptionHandler
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors("AllowAll");
-
 app.MapControllers();
 app.Run();
