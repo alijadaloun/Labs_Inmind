@@ -7,7 +7,7 @@ public class Book
     public int AuthorId { get; set; }
     public string ISBN { get; set; }
     public int PublishedYear { get; set; }
-
+    public Author Author { get; set; }
     public Book( int BookId, string Title, int AuthorId, string ISBN, int PublishedYear )
     {
         this.BookId = BookId;

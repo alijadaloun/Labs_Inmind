@@ -1,0 +1,11 @@
+namespace Lab1;
+
+public class Borrower
+{
+    public int BorrowerId { get; set; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public string Phone { get; set; }
+    public List<Loan> Loans { get; set; }
+    
+}
